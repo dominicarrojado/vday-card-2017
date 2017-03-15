@@ -1,0 +1,393 @@
+@import './utils.less';
+
+.home-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  @media screen and (max-width: 920px) {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  & > .right,
+  & > .left {
+    position: relative;
+    float: right;
+    width: 50%;
+    height: 100%;
+  }
+
+  & > .right {
+    padding: 40px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    @media screen and (max-width: 920px) {
+      width: 100%;
+      height: auto;
+      display: block;
+      overflow: hidden;
+    }
+
+    /* Theme selector */
+    & > .theme-selector {
+      position: relative;
+      width: 100%;
+      padding-left: 145px;
+      margin-bottom: 25px;
+      overflow: hidden;
+
+      @media screen and (max-width: 920px) {
+        padding-right: 70px;
+      }
+
+      @media screen and (max-width: 410px) {
+        padding-top: 40px;
+        padding-left: 0;
+      }
+
+      & > .label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: @color-default;
+        line-height: 40px;
+        font-size: 18px;
+        cursor: default;
+        .type-regular;
+        .select(none);
+      }
+
+      & > .options {
+        position: relative;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        & > li {
+          position: relative;
+          width: 40px;
+          height: 40px;
+          float: left;
+          margin-right: 10px;
+          margin-bottom: 10px;
+          border-radius: 50%;
+          cursor: pointer;
+          .transition(background-color, 0.5s, ease);
+
+          &:hover {
+            background-color: lighten(@color-maroon, 25%);
+          }
+
+          &.active {
+            background-color: @color-maroon;
+          }
+
+          & > div {
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            margin: auto;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+          }
+        }
+      }
+    }
+    /* End of Theme selector */
+
+    .date {
+      position: relative;
+      color: @color-black;
+      font-size: 18px;
+      margin-bottom: 40px;
+      .type-regular;
+    }
+
+    .input-container {
+      position: relative;
+      padding-left: 63px;
+      margin-bottom: 30px;
+
+      &.to-input-container {
+        padding-left: 35px;
+      }
+
+      & > label {
+        position: absolute;
+        left: 0;
+        line-height: 22px;
+        font-size: 18px;
+        color: @color-default;
+        .type-regular;
+      }
+
+      & > input {
+        display: block;
+        width: 100%;
+        font-size: 18px;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        .type-regular;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .message-container {
+      position: relative;
+      padding-right: 50px;
+
+      .suggestions-btn {
+        display: block;
+        position: absolute;
+        right: 0;
+        top: -7px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        text-decoration: none;
+        opacity: .7;
+
+        &:hover {
+          opacity: .8;
+        }
+
+        &:active {
+          opacity: 1;
+        }
+
+        & > img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      #message {
+        width: 100%;
+        min-height: 150px;
+        resize: none;
+        font-size: 18px;
+        border: none;
+        padding: 0;
+        background-color: transparent;
+        margin-bottom: 40px;
+        .type-regular;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    .error {
+      margin-bottom: 20px;
+      font-size: 18px;
+      color: @color-maroon;
+      text-align: center;
+      .type-regular;
+    }
+  }
+
+  & > .left {
+
+    @media screen and (max-width: 920px) {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      width: 100px;
+      height: 100px;
+      cursor: pointer;
+      .transition(all, .8s, ease);
+
+      &.open {
+        top: 0;
+        right: 0;
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        cursor: default;
+
+        .close-preview-btn {
+          display: block;
+        }
+      }
+    }
+
+    .close-preview-btn {
+      display: none;
+      position: absolute;
+      top: 15px;
+      right: 35px;
+      font-size: 50px;
+      color: @color-white;
+      cursor: pointer;
+      .select(none);
+
+      &:hover {
+        color: darken(@color-white, 5%);
+      }
+
+      &:active {
+        color: darken(@color-white, 10%);
+      }
+    }
+  }
+}
+
+.cover {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: @color-black;
+
+  &.cover-teal, &.cover-teal img {
+    background-color: @color-teal;
+  }
+
+  &.cover-pink, &.cover-pink img {
+    background-color: @color-pink;
+  }
+
+  &.cover-red, &.cover-red img {
+    background-color: @color-red;
+  }
+
+  &.cover-black, &.cover-black img {
+    background-color: @color-black;
+  }
+
+  &.cover-purple, &.cover-purple img {
+    background-color: @color-purple;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: 0;
+    opacity: 0;
+    .select(none);
+
+    &.show {
+      height: 100%;
+      opacity: 1;
+    }
+  }
+}
+
+.modal-container {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+
+  &.show {
+    display: block;
+  }
+
+  .wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 10px;
+
+    .modal {
+      position: relative;
+      margin: 0 auto;
+      max-width: 800px;
+      width: 100%;
+      padding: 40px;
+      background-color: #fff;
+      opacity: 1;
+
+      .close-modal-btn {
+        position: absolute;
+        top: 5px;
+        right: 15px;
+        font-size: 45px;
+        color: @color-default;
+        cursor: pointer;
+        .type-regular;
+        .select(none);
+
+        &:hover {
+          color: darken(@color-default, 5%);
+        }
+
+        &:active {
+          color: darken(@color-default, 10%);
+        }
+      }
+
+      .title {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        .type-regular;
+      }
+
+      .messages {
+        position: relative;
+        margin: 0 auto;
+        padding: 0;
+        list-style: none;
+        overflow: hidden;
+        text-align: center;
+
+        & > li {
+          display: inline-block;
+          width: 100%;
+          max-width: 300px;
+          min-height: 140px;
+          margin-right: 15px;
+          margin-bottom: 15px;
+          padding: 20px;
+          background-color: lighten(@color-default, 25%);
+          border: 2px solid transparent;
+          font-size: 16px;
+          text-align: left;
+          cursor: pointer;
+          .type-regular;
+          .force-wrap;
+          .transition(all, 0.5s, ease);
+
+          &:hover {
+            border-color: @color-maroon;
+          }
+
+          &:active {
+            background-color: lighten(@color-default, 10%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: @color-black;
+  z-index: -1;
+  opacity: .8;
+}

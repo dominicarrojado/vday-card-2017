@@ -1,0 +1,161 @@
+<template name="home">
+    <div class="main-container">
+        <div class="wrapper">
+            {{#unless cardId}}
+                <div class="home-container">
+                    <div class="right">
+                        <div class="theme-selector">
+                            <div class="label">
+                                Select a cover
+                            </div>
+                            <ul class="options">
+                                {{#each covers}}
+                                    <li class="cover-item {{#if isEqualTo activeCover .}}active{{/if}}">
+                                        <div style="background-image: url('/img/{{.}}-cover-mini.png')"></div>
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                        <div class="date">
+                            {{today}}
+                        </div>
+                        <form id="publishForm">
+                            <div class="input-container to-input-container">
+                                <label for="to">
+                                    To:
+                                </label>
+                                <input id="to" name="to" class="input-block" type="text" spellcheck="false" autocomplete="off" />
+                            </div>
+                            <div class="input-container">
+                                <label for="from">
+                                    From:
+                                </label>
+                                <input id="from" name="from" class="input-block" type="text" spellcheck="false" autocomplete="off" />
+                            </div>
+                            <div class="message-container">
+                                <a class="suggestions-btn">
+                                    <img src="/img/question-mark.png" alt="Question mark icon">
+                                </a>
+                                <textarea id="message" name="message" rows="1" placeholder="Type your message here..." spellcheck="false" autocomplete="off"></textarea>
+                            </div>
+                            {{#if error}}
+                                <div class="error">
+                                    {{error}}
+                                </div>
+                            {{/if}}
+                            <div class="text-center">
+                                <button type="submit" class="publish-btn btn {{buttonColor activeCover}} {{#if isPublishingCard}}disabled{{/if}}">
+                                    Publish
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="left {{#if preview}}open{{else}}open-preview-btn{{/if}}">
+                        <div class="cover cover-{{activeCover}}">
+                            {{#each covers}}
+                                <img class="{{#if isEqualTo activeCover .}}show{{/if}}" src="/img/{{.}}-cover.gif" alt="cover" />
+                            {{/each}}
+                        </div>
+                        <a class="close-preview-btn">
+                            ×
+                        </a>
+                    </div>
+                </div>
+                <div class="modal-container {{#if showModal}}show{{/if}}">
+                    <div class="modal-backdrop"></div>
+                    <div class="wrapper">
+                        <div class="modal">
+                            <a class="close-modal-btn">
+                                ×
+                            </a>
+                            <div class="title text-center">
+                                Can't think of a message?<br />Pick one from here!
+                            </div>
+                            <ul class="messages">
+                                {{#each messages}}
+                                    <li class="suggested-message">
+                                        {{{parseMessage .}}}
+                                    </li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                {{#with card}}
+                    <head>
+                        <meta property="og:description" content="Test">
+                        <meta property="og:image" content="Test">
+                    </head>
+                    <div class="card-index-container">
+                        <div class="card-index-cover {{#if open}}open{{/if}}">
+                            <div class="cover cover-{{cover}}">
+                                <img class="show" src="/img/{{cover}}-cover.gif" alt="cover" />
+                            </div>
+                            <button class="open-card-btn btn {{buttonColor cover}} {{#unless open}}focus{{/unless}}">
+                                {{#unless open}}
+                                    Open
+                                {{else}}
+                                    Close
+                                {{/unless}}
+                            </button>
+                        </div>
+                        <div class="right">
+                            <div class="preview-cover {{#if open}}show{{/if}}">
+                                <img class="show" src="/img/{{cover}}-cover.gif" />
+                            </div>
+                            <div class="date">
+                                {{showMonthDayYear createdAt}}
+                            </div>
+                            <div class="input-container to-input-container">
+                                <label for="to">
+                                    To:
+                                </label>
+                                {{to}}
+                            </div>
+                            <div class="input-container">
+                                <label for="from">
+                                    From:
+                                </label>
+                                {{from}}
+                            </div>
+
+                            <div class="message">
+                                {{{parseMessage message}}}
+                            </div>
+                            <div class="text-center">
+                                <a class="create-your-own-btn btn {{buttonColor cover}}">
+                                    {{#if isEqualTo createdBy userId}}
+                                        Create another one
+                                    {{else}}
+                                        Create your own
+                                    {{/if}}
+                                </a>
+                                <div class="share-label">
+                                    Share this card
+                                </div>
+                                <div class="share-buttons">
+                                    <a href="https://www.facebook.com/sharer?u=http://tmv.hashtag-interactive.com/{{_id}}" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
+                                        <img src="/img/facebook.png" alt="Facebook icon">
+                                    </a>
+                                    <a href="https://twitter.com/intent/tweet?text=I%20have%20a%20message%20for%20you%2C%20check%20it%20here%3A&url=http://tmv.hastag-interactive.com/{{_id}}" target="_blank" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=400,width=600');return false;">
+                                        <img src="/img/twitter.png" alt="Twitter icon">
+                                    </a>
+                                    <a class="copy-btn" data-clipboard-text="http://tmv.hashtag-interactive.com/{{_id}}">
+                                        <img src="/img/link.png" alt="Link icon">
+                                    </a>
+                                </div>
+                                <div class="copy-label">
+                                    or copy this link:
+                                </div>
+                                <div class="link">
+                                    http://tmv.hashtag-interactive.com/{{_id}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/with}}
+            {{/unless}}
+        </div>
+    </div>
+</template>

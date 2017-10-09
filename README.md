@@ -16,7 +16,7 @@ curl https://install.meteor.com/ | sh
 Clone the app:
 
 ```bash
-git clone https://github.com/mroftalp/vday-card-2017.git
+git clone https://github.com/HashtagInteractive/vday-card-2017.git
 ```
 
 Install npm packages:

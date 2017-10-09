@@ -22,7 +22,7 @@ git clone https://github.com/mroftalp/vday-card-2017.git
 Install npm packages:
 
 ```bash
-cd cny-fortune-teller-2017
+cd vday-card-2017
 meteor npm install
 ```
 
@@ -36,7 +36,7 @@ You can access the app in `http://localhost:3000`.
 
 ## Contributing
 
-1. Fork it ( https://github.com/${my-github-username}/mroftalp/fork )
+1. Fork it ( https://github.com/${my-github-username}/vday-card-2017/fork )
 2. Create your feature branch ( `git checkout -b my-new-feature` )
 3. Commit your changes ( `git commit -m 'Added some feature` )
 4. Push to the branch ( `git push origin my-new-feature` )
